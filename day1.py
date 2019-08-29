@@ -21,3 +21,6 @@ print(result)
 # adds x to y
 y.add_(x)
 print(y)
+
+print(x[:, 1])
+print(x[1, :])
