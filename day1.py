@@ -25,7 +25,7 @@ import torch
 # print(x[:, 1])
 # print(x[1, :])
 
-# x = torch.randn(4,4)
+ x = torch.randn(4,4)
 # y = x.view(16)
 # print(x)
 # print(y)
