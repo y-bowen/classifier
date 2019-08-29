@@ -26,5 +26,5 @@ y = x * 2
 print(y.data.norm())
 while y.data.norm() < 1000:
     y = y * 2
-
+print(y.data.norm())
 print(y)
