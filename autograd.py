@@ -28,3 +28,11 @@ while y.data.norm() < 1000:
     y = y * 2
 print(y.data.norm())
 print(y)
+# Now in this case y is no longer a scalar. 
+# torch.autograd could not compute the full Jacobian directly, 
+# but if we just want the vector-Jacobian product, 
+# simply pass the vector to backward as argument:
+v = torch.tensor([0.1, 1.0, 0.0001], dtype=torch.float)
+y.backward(v)
+
+print(x.grad)
