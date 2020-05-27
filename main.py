@@ -193,6 +193,7 @@ if __name__ == '__main__':
 
     # fire.Fire()
     loader = transforms.Compose([
+        transforms.Resize(224),
         transforms.ToTensor()])
     data = Image.open("./data/train/POS-4441756.bmp")
     data = loader(data)
