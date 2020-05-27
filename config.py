@@ -2,11 +2,13 @@
 import warnings
 import torch as t
 
+from models import ResNet34
+
 
 class DefaultConfig(object):
     env = 'default'  # visdom 环境
     vis_port = 8097  # visdom 端口
-    model = 'ResNet34'  # 使用的模型，名字必须与models/__init__.py中的名字一致   SqueezeNet -> ResNet34
+    model = ResNet34  # 使用的模型，名字必须与models/__init__.py中的名字一致   SqueezeNet -> ResNet34
 
     train_data_root = './data/train/'  # 训练集存放路径   default: './data/train/'
     test_data_root = './data/test1'  # 测试集存放路径     default: './data/test1'
