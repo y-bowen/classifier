@@ -190,5 +190,5 @@ if __name__ == '__main__':
     # import fire
 
     # fire.Fire()
-    a = torch.rand(256, 6, 6)
+    a = torch.rand(1,256, 6, 6)
     print(a.view(a.size(0),256*6*6))
