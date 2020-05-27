@@ -31,7 +31,7 @@ class AlexNet(BasicModule):
         )
         self.classifier = nn.Sequential(
             nn.Dropout(),
-            nn.Linear(256, 4096),
+            nn.Linear(256 * 6 * 6, 4096),
             nn.ReLU(inplace=True),
             nn.Dropout(),
             nn.Linear(4096, 2048),
@@ -52,8 +52,6 @@ class AlexNet(BasicModule):
 
     def forward(self, x):
         x = self.features(x)
-        print("-->{}".format(x.size()))
         x = x.view(x.size(0), 256 * 6 * 6)
-        print("-->{}".format(x.size()))
         x = self.classifier(x)
         return x

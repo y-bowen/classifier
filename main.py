@@ -1,5 +1,6 @@
 import os
 
+import torch
 from torch.utils.data import DataLoader
 from tqdm import tqdm
 
@@ -186,6 +187,8 @@ def help():
 
 
 if __name__ == '__main__':
-    import fire
+    # import fire
 
-    fire.Fire()
+    # fire.Fire()
+    a = torch.rand(256, 6, 6)
+    print(a.view(a.size(0),256*6*6))
