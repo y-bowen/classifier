@@ -66,6 +66,7 @@ class AlexNet(BasicModule):
     def forward(self, x):
         # x = self.features(x)
         # x = x.view(x.size(0), 256 * 6 * 6)
+        print("x-->{}".format(x.size()))
         x = self.conv1(x)
         print("conv1-->{}".format(x.size()))
         x = self.relu1(x)
