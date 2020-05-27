@@ -39,6 +39,7 @@ class ResNet34(BasicModule):
 
         # 前几层: 图像转换
         self.pre = nn.Sequential(
+            # TODO 单通道
             nn.Conv2d(1, 64, 7, 2, 3, bias=False),
             nn.BatchNorm2d(64),
             nn.ReLU(inplace=True),

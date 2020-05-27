@@ -46,7 +46,7 @@ class BatteryCap(data.Dataset):
                     T.Resize(224),
                     T.CenterCrop(224),
                     T.ToTensor(),
-                    normalize
+                    # normalize
                 ])
             # 训练集需要数据增强
             else:
@@ -55,7 +55,7 @@ class BatteryCap(data.Dataset):
                     T.RandomResizedCrop(224),  # 有改动 RandomReSizedCrop -> RandomResizedCrop
                     T.RandomHorizontalFlip(),
                     T.ToTensor(),
-                    normalize
+                    # normalize
                 ])
 
     def __getitem__(self, index):
