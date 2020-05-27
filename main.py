@@ -8,6 +8,8 @@ from data import BatteryCap
 from utils import Visualizer
 import torch as t
 from torchnet import meter
+import models
+
 def train(**kwargs):
     """
     训练
