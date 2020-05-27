@@ -1,7 +1,9 @@
 import os
 
 import torch
+from PIL import Image
 from torch.utils.data import DataLoader
+from torchvision.transforms import transforms
 from tqdm import tqdm
 
 from config import opt
@@ -190,5 +192,8 @@ if __name__ == '__main__':
     # import fire
 
     # fire.Fire()
-    a = torch.rand(1,256, 6, 6)
-    print(a.view(a.size(0),256*6*6).size())
+    loader = transforms.Compose([
+        transforms.ToTensor()])
+    data = Image.open("./data/train/POS-4441756.bmp")
+    data = loader(data)
+    print(data.size())
