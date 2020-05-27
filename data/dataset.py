@@ -65,9 +65,10 @@ class BatteryCap(data.Dataset):
         """
         img_path = self.imgs[index]
         if self.test:
+            # TODO 测试部分还有问题
             label = int(self.imgs[index].split('.')[-2].split('/')[-1])
         else:
-            label = 1 if 'POS' in img_path.split('/')[-1] else 0  # 狗1 猫0
+            label = 1 if 'POS' in img_path.split('/')[-1] else 0  # 合格1 不合格0
         data = Image.open(img_path)
         data = self.transforms(data)
         return data, label
