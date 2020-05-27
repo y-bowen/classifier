@@ -19,7 +19,7 @@ def train(**kwargs):
     vis = Visualizer(opt.env, port=opt.vis_port)
 
     # step1: configure model 模型
-    model = getattr("models", opt.model)()  # 最后的()不要忘
+    model = getattr(models, opt.model)()  # 最后的()不要忘
     if opt.load_model_path:
         model.load(opt.load_model_path)
     model.to(opt.device)  # 这一行和书中相比，改过
