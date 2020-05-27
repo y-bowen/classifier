@@ -54,7 +54,7 @@ class ResNet34(BasicModule):
         self.fc1 = nn.Linear(512, 256)
         self.fc2 = nn.Linear(256, 128)
         self.fc3 = nn.Linear(128, 64)
-        self.fc4 = nn.Linear(32, num_classes)
+        self.fc4 = nn.Linear(64, num_classes)
 
     def _make_layer(self, inchannel, outchannel, block_num, stride=1):
         '''
