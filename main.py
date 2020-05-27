@@ -71,7 +71,7 @@ def train(**kwargs):
             confusion_matrix.add(score.detach(), label_batch.detach())
 
             if (ii + 1) % opt.print_freq == 0:
-                # vis.plot('loss', loss_meter.value()[0])  # 先不可视化了!!!
+                vis.plot('loss', loss_meter.value()[0])  # 先不可视化了!!!
                 print('   loss: ', loss_meter.value()[0])
 
                 # 如果需要的话，进入debug模式

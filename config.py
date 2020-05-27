@@ -14,7 +14,7 @@ class DefaultConfig(object):
 
     batch_size = 32  # batch size   default: 32  4
     use_gpu = False  # user GPU or not
-    num_workers = 4  # how many workers for loading data
+    num_workers = 8  # how many workers for loading data
     print_freq = 20  # print info every N batch
 
     debug_file = '/tmp/debug'  # if os.path.exists(debug_file): enter ipdb
