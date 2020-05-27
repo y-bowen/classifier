@@ -44,7 +44,7 @@ class BatteryCap(data.Dataset):
             if self.test or not train:
                 self.transforms = T.Compose([
                     T.Resize(224),
-                    T.CenterCrop(224),
+                    # T.CenterCrop(224),
                     T.ToTensor(),
                     # normalize
                 ])
@@ -52,8 +52,8 @@ class BatteryCap(data.Dataset):
             else:
                 self.transforms = T.Compose([
                     T.Resize(256),
-                    T.RandomResizedCrop(224),  # 有改动 RandomReSizedCrop -> RandomResizedCrop
-                    T.RandomHorizontalFlip(),
+                    # T.RandomResizedCrop(224),  # 有改动 RandomReSizedCrop -> RandomResizedCrop
+                    # T.RandomHorizontalFlip(),
                     T.ToTensor(),
                     # normalize
                 ])
