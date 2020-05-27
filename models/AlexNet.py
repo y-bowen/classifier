@@ -9,13 +9,13 @@ class AlexNet(BasicModule):
     结构参考 <https://arxiv.org/abs/1404.5997>
     '''
 
-    def __init__(self, inputchannel=3, num_classes=2):
+    def __init__(self, input_channel=3, num_classes=2):
         super(AlexNet, self).__init__()
 
         self.model_name = 'alexnet'
 
         self.features = nn.Sequential(
-            nn.Conv2d(inputchannel, 64, kernel_size=11, stride=4, padding=2),
+            nn.Conv2d(input_channel, 64, kernel_size=11, stride=4, padding=2),
             nn.ReLU(inplace=True),
             nn.MaxPool2d(kernel_size=3, stride=2),
             nn.Conv2d(64, 192, kernel_size=5, padding=2),

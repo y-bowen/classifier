@@ -33,13 +33,13 @@ class ResNet34(BasicModule):
     用子module来实现Residual block，用_make_layer函数来实现layer
     '''
 
-    def __init__(self, inputchannel=3, num_classes=2):
+    def __init__(self, input_channel=3, num_classes=2):
         super(ResNet34, self).__init__()
         self.model_name = 'resnet34'
 
         # 前几层: 图像转换
         self.pre = nn.Sequential(
-            nn.Conv2d(inputchannel, 64, 7, 2, 3, bias=False),
+            nn.Conv2d(input_channel, 64, 7, 2, 3, bias=False),
             nn.BatchNorm2d(64),
             nn.ReLU(inplace=True),
             nn.MaxPool2d(3, 2, 1))
