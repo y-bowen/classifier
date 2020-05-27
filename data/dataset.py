@@ -51,7 +51,7 @@ class BatteryCap(data.Dataset):
             # 训练集需要数据增强
             else:
                 self.transforms = T.Compose([
-                    T.Resize(256),
+                    T.Resize(224),
                     # T.RandomResizedCrop(224),  # 有改动 RandomReSizedCrop -> RandomResizedCrop
                     # T.RandomHorizontalFlip(),
                     T.ToTensor(),
