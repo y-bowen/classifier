@@ -197,8 +197,10 @@ if __name__ == '__main__':
         transforms.ToTensor()])
     data = Image.open("./data/train/POS-4441756.bmp")
     data = loader(data)
-    d = torch.Tensor(1,1,224,224)
-    d[0] = data
-    c = torch.nn.Conv2d(1, 64, kernel_size=11, stride=4, padding=2)
-    data = c(d)
+    data = data.view(1, 1, 224, 224)
     print(data.size())
+    c = torch.nn.Conv2d(1, 64, kernel_size=11, stride=4, padding=2)
+    data = c(data)
+    print(data.size())
+    # d = torch.Tensor(1, 1, 224, 224)
+    # d[0] = data
