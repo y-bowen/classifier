@@ -16,10 +16,10 @@ class BatteryCap(data.Dataset):
         imgs = [os.path.join(root, img) for img in os.listdir(root)]
 
         # 训练集和验证集的文件命名不一样
-        if self.test:
-            imgs = sorted(imgs, key=lambda x: int(x.split('.')[-2].split('/')[-1]))
-        else:
-            imgs = sorted(imgs, key=lambda x: int(x.split('.')[-2]))
+        # if self.test:
+            # imgs = sorted(imgs, key=lambda x: int(x.split('.')[0].split('/')[-1]))
+        # else:
+            # imgs = sorted(imgs, key=lambda x: int(x.split('.')[0]))
 
         imgs_num = len(imgs)
 
