@@ -16,8 +16,6 @@ class BatteryCap(data.Dataset):
         imgs = [os.path.join(root, img) for img in os.listdir(root)]
 
         # 训练集和验证集的文件命名不一样
-        # train: data/train/cat.10004.jpg
-        # test1: data/test1/8973.jpg
         if self.test:
             imgs = sorted(imgs, key=lambda x: int(x.split('.')[-2].split('/')[-1]))
         else:
@@ -65,13 +63,11 @@ class BatteryCap(data.Dataset):
         一次返回一张图片的数据
         如果是测试集，没有图片的id，如1000.jpg返回1000
         """
-        # train: data/train/cat.10004.jpg
-        # test1: data/test1/8973.jpg
         img_path = self.imgs[index]
         if self.test:
             label = int(self.imgs[index].split('.')[-2].split('/')[-1])
         else:
-            label = 1 if 'dog' in img_path.split('/')[-1] else 0  # 狗1 猫0
+            label = 1 if 'POS' in img_path.split('/')[-1] else 0  # 狗1 猫0
         data = Image.open(img_path)
         data = self.transforms(data)
         return data, label

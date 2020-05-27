@@ -25,7 +25,7 @@ class DefaultConfig(object):
     lr_decay = 0.95  # when val_loss increase, lr = lr*lr_decay   default: 0.5
     weight_decay = 0e-5  # 损失函数  default: 0e-5    1e-5
 
-    # 这里暂时可以先不管，后面会讲
+
     def _parse(self, kwargs):
         """
         根据字典kwargs 更新 config参数
