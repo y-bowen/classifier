@@ -13,7 +13,7 @@ class DefaultConfig(object):
     load_model_path = './checkpoints/resnet34_05-27_13.36.34.pth'  # 加载预训练的模型的路径，为None代表不加载  default: None
 
     batch_size = 32  # batch size   default: 32  4
-    use_gpu = True  # user GPU or not
+    use_gpu = False  # user GPU or not
     num_workers = 8  # how many workers for loading data
     print_freq = 20  # print info every N batch
 
