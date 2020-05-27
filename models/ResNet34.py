@@ -72,7 +72,6 @@ class ResNet34(BasicModule):
         return nn.Sequential(*layers)
 
     def forward(self, x):
-        print("x-->{}".format(x.size()))
         x = self.pre(x)
 
         x = self.layer1(x)
