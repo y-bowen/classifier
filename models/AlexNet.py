@@ -53,6 +53,6 @@ class AlexNet(BasicModule):
     def forward(self, x):
         x = self.features(x)
         # x = x.view(x.size(0), 256 * 6 * 6)
-        print(x.size)
+        print("-->{}".format(x.size()))
         x = self.classifier(x)
         return x
