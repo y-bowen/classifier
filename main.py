@@ -198,6 +198,7 @@ if __name__ == '__main__':
     data = Image.open("./data/train/POS-4441756.bmp")
     data = loader(data)
     data = data.view(1, 1, 224, 224)
+    print(data)
     print(data.size())
     c = torch.nn.Conv2d(1, 64, kernel_size=11, stride=4, padding=2)
     data = c(data)
