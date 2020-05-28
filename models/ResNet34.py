@@ -84,4 +84,6 @@ class ResNet34(BasicModule):
         x = self.fc1(x)
         x = self.fc2(x)
         x = self.fc3(x)
-        return self.fc4(x)
+        x = self.fc4(x)
+        print(x.size)
+        return x
