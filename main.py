@@ -63,7 +63,6 @@ def train(**kwargs):
 
             optimizer.zero_grad()  # 梯度清零
             score = model(input_batch)
-            print(score[0])
             loss = criterion(score, label_batch)
             loss.backward()  # 反向传播
             optimizer.step()  # 优化
