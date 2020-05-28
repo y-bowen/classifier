@@ -1,6 +1,7 @@
+import glob
 import os
 
-import torch
+import torch as t
 from PIL import Image
 from torch.utils.data import DataLoader
 from torchvision.transforms import transforms
@@ -186,6 +187,16 @@ def help():
     from inspect import getsource
     source = (getsource(opt.__class__))  # DefaultConfig类
     print(source)
+def transforms():
+    horizontalFlip = transforms.RandomHorizontalFlip(p=1)
+    verticalFlip = transforms.RandomVerticalFlip(p=1)
+    rotation = transforms.RandomRotation(90)
+    for i in glob.glob(os.path.join(opt.train_data_root, '*.bmp')):
+        data = Image.open(i)
+        data = self.transforms(data)
+        pass
+
+
 
 
 if __name__ == '__main__':
