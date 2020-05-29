@@ -51,10 +51,16 @@ class ResNet34(BasicModule):
         self.layer4 = self._make_layer(512, 512, 3, stride=2)
 
         # 分类用的全连接
-        self.fc1 = nn.Linear(1017, 512)
-        self.fc2 = nn.Linear(512, 256)
-        self.fc3 = nn.Linear(256, 128)
-        self.fc4 = nn.Linear(128, num_classes)
+        self.classifier = nn.Sequential(
+            nn.Dropout(),
+            nn.Linear(12800, 6400),
+            nn.Dropout(),
+            nn.Linear(6400, 3200),
+            nn.Linear(3200, 1024),
+            nn.Linear(1024, 512),
+            nn.Linear(512, 128),
+            nn.Linear(128, num_classes)
+        )
 
     def _make_layer(self, inchannel, outchannel, block_num, stride=1):
         '''
@@ -81,6 +87,7 @@ class ResNet34(BasicModule):
 
         x = F.avg_pool2d(x, 7)
         x = x.view(x.size(0), -1)
+
         x = self.fc1(x)
         x = self.fc2(x)
         x = self.fc3(x)
