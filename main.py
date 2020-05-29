@@ -3,7 +3,7 @@ import os
 import uuid
 from PIL import Image
 from torch.utils.data import DataLoader
-from torchvision.transforms import transforms
+from torchvision.transforms import transforms as T
 from tqdm import tqdm
 
 from config import opt
@@ -200,16 +200,16 @@ def transforms():
         if 'POS' in i.split('/')[-1]:
             profix = "POS"
         p = profix + "-" + str(uid) + "1.bmp"
-        data = transforms.RandomHorizontalFlip(p=1)(img)
+        data = T.RandomHorizontalFlip(p=1)(img)
         data.save(os.path.join("./data/train", p))
         p = profix + "-" + str(uid) + "2.bmp"
-        data = transforms.RandomVerticalFlip(p=1)(img)
+        data = T.RandomVerticalFlip(p=1)(img)
         data.save(os.path.join("./data/train", p))
         p = profix + "-" + str(uid) + "3.bmp"
-        data = transforms.RandomRotation(90)(img)
+        data = T.RandomRotation(90)(img)
         data.save(os.path.join("./data/train", p))
         p = profix + "-" + str(uid) + "4.bmp"
-        data = transforms.RandomRotation(270)(img)
+        data = T.RandomRotation(270)(img)
         data.save(os.path.join("./data/train", p))
 
 
