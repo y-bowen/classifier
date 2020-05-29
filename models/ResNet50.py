@@ -59,7 +59,7 @@ class ResNet(BasicModule):
     def __init__(self, blocks, num_classes=1000, expansion=4, input_channel=3):
         super(ResNet, self).__init__()
         self.expansion = expansion
-        print(input_channel)
+
         self.conv1 = Conv1(in_planes=input_channel, places=64)
 
         self.layer1 = self.make_layer(in_places=64, places=64, block=blocks[0], stride=1)
@@ -73,7 +73,7 @@ class ResNet(BasicModule):
             nn.Linear(1024, 512),
             nn.Linear(512, 256),
             nn.Linear(256, 128),
-            nn.Linear(256, 64),
+            nn.Linear(128, 64),
             nn.Linear(64, 32),
             nn.Linear(32, num_classes)
         )
