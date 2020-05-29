@@ -67,7 +67,7 @@ class ResNet(BasicModule):
         self.layer3 = self.make_layer(in_places=512, places=256, block=blocks[2], stride=2)
         self.layer4 = self.make_layer(in_places=1024, places=512, block=blocks[3], stride=2)
 
-        self.avgpool = nn.AvgPool2d(7, stride=1)
+        self.avgpool = nn.AvgPool2d(10, stride=1)
         self.fc = nn.Linear(2048, num_classes)
 
         for m in self.modules():
