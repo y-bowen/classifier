@@ -33,7 +33,7 @@ class ResNet34(BasicModule):
     用子module来实现Residual block，用_make_layer函数来实现layer
     '''
 
-    def __init__(self, input_channel=3, num_classes=2):
+    def __init__(self, input_channel=1, num_classes=2):
         super(ResNet34, self).__init__()
         self.model_name = 'resnet34'
 
@@ -79,12 +79,12 @@ class ResNet34(BasicModule):
 
     def forward(self, x):
         x = self.pre(x)
-
+        print(x.size())
         x = self.layer1(x)
         x = self.layer2(x)
         x = self.layer3(x)
         x = self.layer4(x)
-
+        print(x.size())
         x = F.avg_pool2d(x, 7)
         x = x.view(x.size(0), -1)
 

@@ -99,7 +99,7 @@ class ResNet(BasicModule):
         return x
 
 
-def ResNet50(num_classes=1000, expansion=4, input_channel=3):
+def ResNet50(num_classes=2, expansion=4, input_channel=1):
     return ResNet([3, 4, 6, 3], num_classes, expansion, input_channel)
 
 
