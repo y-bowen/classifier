@@ -80,7 +80,7 @@ class ResNet34(BasicModule):
         x = self.layer4(x)
 
         x = F.avg_pool2d(x, 7)
-        x = x.view(x.size(0), -1)
+        x = x.view(x.size(0), 256 * 6)
         x = self.fc1(x)
         x = self.fc2(x)
         x = self.fc3(x)
