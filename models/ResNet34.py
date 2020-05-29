@@ -51,9 +51,9 @@ class ResNet34(BasicModule):
         self.layer4 = self._make_layer(512, 512, 3, stride=2)
 
         # 分类用的全连接
-        self.fc1 = nn.Linear(4608, 2048)
-        self.fc2 = nn.Linear(2048, 512)
-        self.fc3 = nn.Linear(512, 128)
+        self.fc1 = nn.Linear(2034, 1024)
+        self.fc2 = nn.Linear(512, 256)
+        self.fc3 = nn.Linear(256, 128)
         self.fc4 = nn.Linear(128, num_classes)
 
     def _make_layer(self, inchannel, outchannel, block_num, stride=1):
