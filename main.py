@@ -205,10 +205,10 @@ def transforms():
         data = T.RandomVerticalFlip(p=1)(img)
         data.save(os.path.join("./data/train", p))
         p = profix + "-" + str(uid) + "3.bmp"
-        data = T.RandomRotation(90)(img)
+        data = img.rotate(90)
         data.save(os.path.join("./data/train", p))
         p = profix + "-" + str(uid) + "4.bmp"
-        data = T.RandomRotation(270)(img)
+        data = img.rotate(270)
         data.save(os.path.join("./data/train", p))
 
 
