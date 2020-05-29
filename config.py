@@ -13,7 +13,7 @@ class DefaultConfig(object):
     test_data_root = './data/test1'  # 测试集存放路径     default: './data/test1'
     load_model_path = None  # 加载预训练的模型的路径，为None代表不加载  default: None
 
-    batch_size = 40  # batch size   default: 32  4
+    batch_size = 16  # batch size   default: 32  4
     use_gpu = True  # user GPU or not
     num_workers = 8  # how many workers for loading data
     print_freq = 20  # print info every N batch
