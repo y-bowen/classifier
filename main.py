@@ -194,7 +194,6 @@ def help():
 def transforms():
     for i in glob.glob(os.path.join(opt.train_data_root, '*.bmp')):
         uid = uuid.uuid1()
-        print(str(uid))
         profix = "NEG"
         img = Image.open(i)
         if 'POS' in i.split('/')[-1]:
