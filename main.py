@@ -198,16 +198,16 @@ def transforms():
         img = Image.open(i)
         if 'POS' in i.split('/')[-1]:
             profix = "POS"
-        p = profix + "-" + uid + 1 + ".bmp"
+        p = profix + "-" % uid + "1.bmp"
         data = transforms.RandomHorizontalFlip(p=1)(img)
         data.save(os.path.join("./data/train", p))
-        p = profix + "-" + uid + 2 + ".bmp"
+        p = profix + "-" % uid + "2.bmp"
         data = transforms.RandomVerticalFlip(p=1)(img)
         data.save(os.path.join("./data/train", p))
-        p = profix + "-" + uid + 3 + ".bmp"
+        p = profix + "-" % uid + "3.bmp"
         data = transforms.RandomRotation(90)(img)
         data.save(os.path.join("./data/train", p))
-        p = profix + "-" + uid + 4 + ".bmp"
+        p = profix + "-" % uid + "4.bmp"
         data = transforms.RandomRotation(270)(img)
         data.save(os.path.join("./data/train", p))
 
