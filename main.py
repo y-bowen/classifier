@@ -1,8 +1,6 @@
 import glob
 import os
 import uuid
-
-import torch as t
 from PIL import Image
 from torch.utils.data import DataLoader
 from torchvision.transforms import transforms
