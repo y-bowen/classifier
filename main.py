@@ -192,10 +192,6 @@ def help():
 
 
 def transforms():
-    horizontalFlip = transforms.RandomHorizontalFlip(p=1)
-    verticalFlip = transforms.RandomVerticalFlip(p=1)
-    rotation1 = transforms.RandomRotation(90)
-    rotation2 = transforms.RandomRotation(270)
     for i in glob.glob(os.path.join(opt.train_data_root, '*.bmp')):
         uid = uuid.uuid1()
         profix = "NEG"
@@ -203,16 +199,16 @@ def transforms():
         if 'POS' in i.split('/')[-1]:
             profix = "POS"
         p = profix + "-" + uid + 1 + ".bmp"
-        data = horizontalFlip(img)
+        data = transforms.RandomHorizontalFlip(p=1)(img)
         data.save(os.path.join("./data/train", p))
         p = profix + "-" + uid + 2 + ".bmp"
-        data = verticalFlip(img)
+        data = transforms.RandomVerticalFlip(p=1)(img)
         data.save(os.path.join("./data/train", p))
         p = profix + "-" + uid + 3 + ".bmp"
-        data = rotation1(img)
+        data = transforms.RandomRotation(90)(img)
         data.save(os.path.join("./data/train", p))
         p = profix + "-" + uid + 4 + ".bmp"
-        data = rotation2(img)
+        data = transforms.RandomRotation(270)(img)
         data.save(os.path.join("./data/train", p))
 
 
