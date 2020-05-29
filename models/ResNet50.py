@@ -11,7 +11,7 @@ def Conv1(in_planes, places, stride=2):
         nn.BatchNorm2d(places),
         nn.ReLU(inplace=True),
         nn.MaxPool2d(kernel_size=4, stride=2, padding=1),
-        nn.Conv2d(in_channels=in_planes, out_channels=places, kernel_size=3, stride=2, padding=0, bias=False),
+        nn.Conv2d(in_channels=places, out_channels=places, kernel_size=3, stride=2, padding=0, bias=False),
         nn.BatchNorm2d(places),
         nn.ReLU(inplace=True),
         nn.MaxPool2d(kernel_size=3, stride=2, padding=0)
