@@ -1,5 +1,6 @@
 import glob
 import os
+import uuid
 
 import torch as t
 from PIL import Image
@@ -13,6 +14,7 @@ from utils import Visualizer
 import torch as t
 from torchnet import meter
 import models
+
 
 def train(**kwargs):
     """
@@ -129,12 +131,14 @@ def val(model, dataloader):
 
     return confusion_matrix, accuracy
 
-def write_csv(results,file_name):
+
+def write_csv(results, file_name):
     import csv
-    with open(file_name,'w') as f:
+    with open(file_name, 'w') as f:
         writer = csv.writer(f)
-        writer.writerow(['id','label'])
+        writer.writerow(['id', 'label'])
         writer.writerows(results)
+
 
 @t.no_grad()  # pytorch>=0.5
 def test(**kwargs):
@@ -187,16 +191,31 @@ def help():
     from inspect import getsource
     source = (getsource(opt.__class__))  # DefaultConfig类
     print(source)
+
+
 def transforms():
     horizontalFlip = transforms.RandomHorizontalFlip(p=1)
     verticalFlip = transforms.RandomVerticalFlip(p=1)
-    rotation = transforms.RandomRotation(90)
+    rotation1 = transforms.RandomRotation(90)
+    rotation2 = transforms.RandomRotation(270)
     for i in glob.glob(os.path.join(opt.train_data_root, '*.bmp')):
-        data = Image.open(i)
-        data = self.transforms(data)
-        pass
-
-
+        uid = uuid.uuid1()
+        profix = "NEG"
+        img = Image.open(i)
+        if 'POS' in i.split('/')[-1]:
+            profix = "POS"
+        p = profix + "-" + uid + 1 + ".bmp"
+        data = horizontalFlip(img)
+        data.save(os.path.join("./data/train", p))
+        p = profix + "-" + uid + 2 + ".bmp"
+        data = verticalFlip(img)
+        data.save(os.path.join("./data/train", p))
+        p = profix + "-" + uid + 3 + ".bmp"
+        data = rotation1(img)
+        data.save(os.path.join("./data/train", p))
+        p = profix + "-" + uid + 4 + ".bmp"
+        data = rotation2(img)
+        data.save(os.path.join("./data/train", p))
 
 
 if __name__ == '__main__':
