@@ -5,10 +5,14 @@ __all__ = ['ResNet50', 'ResNet101', 'ResNet152']
 
 def Conv1(in_planes, places, stride=2):
     return nn.Sequential(
-        nn.Conv2d(in_channels=in_planes, out_channels=places, kernel_size=7, stride=stride, padding=3, bias=False),
+        nn.Conv2d(in_channels=in_planes, out_channels=places, kernel_size=8, stride=stride, padding=3, bias=False),
         nn.BatchNorm2d(places),
         nn.ReLU(inplace=True),
-        nn.MaxPool2d(kernel_size=3, stride=2, padding=1)
+        nn.MaxPool2d(kernel_size=4, stride=2, padding=1),
+        nn.Conv2d(in_channels=in_planes, out_channels=places, kernel_size=3, stride=2, padding=0, bias=False),
+        nn.BatchNorm2d(places),
+        nn.ReLU(inplace=True),
+        nn.MaxPool2d(kernel_size=3, stride=2, padding=0)
     )
 
 
@@ -93,8 +97,8 @@ class ResNet(nn.Module):
         return x
 
 
-def ResNet50():
-    return ResNet([3, 4, 6, 3])
+def ResNet50(num_classes=1000, expansion=4, input_channel=3):
+    return ResNet([3, 4, 6, 3], num_classes, expansion, input_channel)
 
 
 def ResNet101():
