@@ -100,6 +100,8 @@ class ResNet(BasicModule):
 
 
 def ResNet50(num_classes=1000, expansion=4, input_channel=3):
+    print(num_classes)
+    print(input_channel)
     return ResNet([3, 4, 6, 3], num_classes, expansion, input_channel)
 
 
