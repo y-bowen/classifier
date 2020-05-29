@@ -43,7 +43,7 @@ class BatteryCap(data.Dataset):
             # 测试集和验证集不用数据增强
             if self.test or not train:
                 self.transforms = T.Compose([
-                    # T.Resize(224),
+                    T.Resize(1024),
                     # T.CenterCrop(224),
                     T.ToTensor(),
                     # normalize
@@ -51,7 +51,7 @@ class BatteryCap(data.Dataset):
             # 训练集需要数据增强
             else:
                 self.transforms = T.Compose([
-                    # T.Resize(224),
+                    T.Resize(1024),
                     # T.RandomResizedCrop(224),  # 有改动 RandomReSizedCrop -> RandomResizedCrop
                     # T.RandomHorizontalFlip(),
                     T.ToTensor(),
