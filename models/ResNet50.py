@@ -59,7 +59,7 @@ class ResNet(BasicModule):
     def __init__(self, blocks, num_classes=1000, expansion=4, input_channel=3):
         super(ResNet, self).__init__()
         self.expansion = expansion
-
+        print(input_channel)
         self.conv1 = Conv1(in_planes=input_channel, places=64)
 
         self.layer1 = self.make_layer(in_places=64, places=64, block=blocks[0], stride=1)
@@ -86,7 +86,6 @@ class ResNet(BasicModule):
         return nn.Sequential(*layers)
 
     def forward(self, x):
-        print(x.size())
         x = self.conv1(x)
 
         x = self.layer1(x)
@@ -101,8 +100,6 @@ class ResNet(BasicModule):
 
 
 def ResNet50(num_classes=1000, expansion=4, input_channel=3):
-    print(num_classes)
-    print(input_channel)
     return ResNet([3, 4, 6, 3], num_classes, expansion, input_channel)
 
 
