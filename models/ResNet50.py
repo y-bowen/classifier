@@ -1,5 +1,7 @@
 import torch.nn as nn
 
+from models.BasicModule import BasicModule
+
 __all__ = ['ResNet50', 'ResNet101', 'ResNet152']
 
 
@@ -53,7 +55,7 @@ class Bottleneck(nn.Module):
         return out
 
 
-class ResNet(nn.Module):
+class ResNet(BasicModule):
     def __init__(self, blocks, num_classes=1000, expansion=4, input_channel=3):
         super(ResNet, self).__init__()
         self.expansion = expansion
