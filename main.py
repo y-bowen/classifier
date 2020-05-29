@@ -2,7 +2,6 @@ import glob
 import os
 import uuid
 
-import torch
 from PIL import Image
 from torch.utils.data import DataLoader
 from torchvision.transforms import transforms as T
@@ -215,10 +214,6 @@ def transforms():
 
 
 if __name__ == '__main__':
-    # import fire
-    #
-    # fire.Fire()
-    d = torch.Tensor(1, 1, 1300, 1300)
-    print(d.size())
-    d = torch.nn.Conv2d(1, 64, 7, 2, 3, bias=False)(d)
-    print(d.size())
+    import fire
+
+    fire.Fire()
