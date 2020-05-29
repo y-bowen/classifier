@@ -79,12 +79,10 @@ class ResNet34(BasicModule):
 
     def forward(self, x):
         x = self.pre(x)
-        print(x.size())
         x = self.layer1(x)
         x = self.layer2(x)
         x = self.layer3(x)
         x = self.layer4(x)
-        print(x.size())
         x = F.avg_pool2d(x, 7)
         x = x.view(x.size(0), -1)
 

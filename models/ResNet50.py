@@ -68,7 +68,15 @@ class ResNet(BasicModule):
         self.layer4 = self.make_layer(in_places=1024, places=512, block=blocks[3], stride=2)
 
         self.avgpool = nn.AvgPool2d(10, stride=1)
-        self.fc = nn.Linear(2048, num_classes)
+        self.classifier = nn.Sequential(
+            nn.Linear(2048, 1024),
+            nn.Linear(1024, 512),
+            nn.Linear(512, 256),
+            nn.Linear(256, 128),
+            nn.Linear(256, 64),
+            nn.Linear(64, 32),
+            nn.Linear(32, num_classes)
+        )
 
         for m in self.modules():
             if isinstance(m, nn.Conv2d):
@@ -87,15 +95,15 @@ class ResNet(BasicModule):
 
     def forward(self, x):
         x = self.conv1(x)
-        print(x.size())
+
         x = self.layer1(x)
         x = self.layer2(x)
         x = self.layer3(x)
         x = self.layer4(x)
-        print(x.size())
+
         x = self.avgpool(x)
         x = x.view(x.size(0), -1)
-        x = self.fc(x)
+        x = self.classifier(x)
         return x
 
 
