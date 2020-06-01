@@ -112,9 +112,9 @@ def ResNet50(num_classes=2, expansion=4, input_channel=1):
     return ResNet([3, 4, 6, 3], num_classes, expansion, input_channel)
 
 
-def ResNet101():
-    return ResNet([3, 4, 23, 3])
+def ResNet101(num_classes=2, expansion=4, input_channel=1):
+    return ResNet([3, 4, 23, 3], num_classes, expansion, input_channel)
 
 
-def ResNet152():
-    return ResNet([3, 8, 36, 3])
+def ResNet152(num_classes=2, expansion=4, input_channel=1):
+    return ResNet([3, 8, 36, 3], num_classes, expansion, input_channel)
