@@ -58,6 +58,7 @@ class Bottleneck(nn.Module):
 class ResNet(BasicModule):
     def __init__(self, blocks, num_classes=1000, expansion=4, input_channel=3):
         super(ResNet, self).__init__()
+        self.model_name = 'resnet'
         self.expansion = expansion
 
         self.conv1 = Conv1(in_planes=input_channel, places=64)
