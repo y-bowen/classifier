@@ -11,7 +11,7 @@ class DefaultConfig(object):
     inputchannel = 1  # 输入图片通道
     train_data_root = './data/train/'  # 训练集存放路径   default: './data/train/'
     test_data_root = './data/test1'  # 测试集存放路径     default: './data/test1'
-    load_model_path = None  # 加载预训练的模型的路径，为None代表不加载  default: None
+    load_model_path = "'<class '\''models.ResNet50.ResNet'\''>_06-01_13.56.09.pth'"  # 加载预训练的模型的路径，为None代表不加载  default: None
 
     batch_size = 4  # batch size   default: 32  4
     use_gpu = True  # user GPU or not
