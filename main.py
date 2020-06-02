@@ -211,6 +211,12 @@ def transforms():
         p = profix + "-" + str(uid) + "4.bmp"
         data = img.rotate(270)
         data.save(os.path.join("./data/train", p))
+        p = profix + "-" + str(uid) + "5.bmp"
+        data = T.RandomRotation(90)(img)
+        data.save(os.path.join("./data/train", p))
+        p = profix + "-" + str(uid) + "6.bmp"
+        data = T.RandomRotation(270)(img)
+        data.save(os.path.join("./data/train", p))
 
 
 if __name__ == '__main__':
