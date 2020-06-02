@@ -9,7 +9,7 @@ efficientnet_b6 = EfficientNet.from_name("efficientnet-b6")
 efficientnet_b7 = EfficientNet.from_name("efficientnet-b7")
 
 
-def efficientnet_b0(num_classes=2):
+def efficientnet_b0():
     efficientnet_b0 = EfficientNet.from_name("efficientnet-b0")
-    efficientnet_b0._fc.out_features = num_classes
+    efficientnet_b0._fc.out_features = 2
     return efficientnet_b0
