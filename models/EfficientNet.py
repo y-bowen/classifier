@@ -13,6 +13,7 @@ efficientnet_b7 = EfficientNet.from_name("efficientnet-b7")
 
 class Efficientnet_b0(BasicModule):
     def __init__(self):
+        super(Efficientnet_b0, self).init()
         self.efficientnet_b0 = EfficientNet.from_name("efficientnet-b0")
         self.efficientnet_b0._fc.out_features = 2
 
