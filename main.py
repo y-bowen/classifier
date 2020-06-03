@@ -219,23 +219,21 @@ def transforms():
         data.save(os.path.join("./data/train", p))
 
 def compute_mean_std():
-    startt = 5000
-    CNum = 10000  # 挑选多少图片进行计算
     channel = 0
-    channel_square = 0
-    pixels_num = 0
+    std = 0
     filename = os.listdir(opt.train_data_root)
-    for i in tqdm(range(startt, startt + CNum)):
-        img = Image.open(os.path.join(opt.train_data_root, filename[i]))
-        h, w = img.size
-        pixels_num += h * w  # 统计单个通道的像素数量
+    for i in tqdm(glob.glob(os.path.join(opt.train_data_root, '*.bmp'))):
+        img = Image.open(i)
+        # h, w = img.size
+        # pixels_num += h * w  # 统计单个通道的像素数量
         img = np.array(img)
-        temp = img[:, :]
-        channel += np.sum(temp)
-        channel_square += np.sum(np.power(temp, 2.0))
+        # channel += np.sum(img)
+        channel += img.mean()
+        std += img.std()
+        # channel_square += np.sum(np.power(img, 2.0))
 
 
-    mean = channel / pixels_num
+    mean = channel / len(filename)
 
     """   
     S^2
@@ -246,7 +244,7 @@ def compute_mean_std():
     = sum(x^2)/N - x'^2
     """
 
-    std = np.sqrt(channel_square / pixels_num - mean * mean)
+    std = std / len(filename)
 
     print("mean is %f" % (mean))
     print("std is %f" % (std))
