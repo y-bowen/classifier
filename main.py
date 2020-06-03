@@ -225,7 +225,7 @@ def compute_mean_std():
     channel_square = 0
     pixels_num = 0
     filename = os.listdir(opt.train_data_root)
-    for i in range(startt, startt + CNum):
+    for i in tqdm(range(startt, startt + CNum)):
         img = Image.open(os.path.join(opt.train_data_root, filename[i]))
         h, w = img.size
         pixels_num += h * w  # 统计单个通道的像素数量
