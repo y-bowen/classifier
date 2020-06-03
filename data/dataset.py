@@ -5,7 +5,6 @@ from torch.utils import data
 import numpy as np
 from torchvision import transforms as T
 
-
 class BatteryCap(data.Dataset):
 
     def __init__(self, root, transforms=None, train=True, test=False):
@@ -21,7 +20,7 @@ class BatteryCap(data.Dataset):
         # else:
             # imgs = sorted(imgs, key=lambda x: int(x.split('.')[0]))
 
-        imgs_num = len(imgs)
+        self.imgs_num = len(imgs)
 
         # shuffle imgs   看作者知乎代码加的
         np.random.seed(100)
@@ -31,9 +30,9 @@ class BatteryCap(data.Dataset):
         if self.test:
             self.imgs = imgs
         elif train:
-            self.imgs = imgs[:int(0.7 * imgs_num)]
+            self.imgs = imgs[:int(0.7 * self.imgs_num)]
         else:
-            self.imgs = imgs[int(0.7 * imgs_num):]  # 训练集中的30%用作验证集
+            self.imgs = imgs[int(0.7 * self.imgs_num):]  # 训练集中的30%用作验证集
 
         if transforms is None:
             # 数据转换操作，测试验证和训练的数据转换有所区别
