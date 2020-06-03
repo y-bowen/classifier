@@ -1,6 +1,6 @@
 import torch.nn as nn
 import math
-
+from models.BasicModule import BasicModule
 
 class Bottleneck(nn.Module):
     expansion = 4
@@ -65,7 +65,7 @@ def Conv1(in_planes, places, stride=2):
         nn.ReLU(inplace=True),
         nn.MaxPool2d(kernel_size=3, stride=2, padding=0)
     )
-class SEResNet(nn.Module):
+class SEResNet(BasicModule):
 
     def __init__(self, block, layers, num_classes=2, input_channel=1):
         self.inplanes = 64
