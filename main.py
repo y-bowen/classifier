@@ -250,12 +250,12 @@ def compute_mean_std():
     print("std is %f" % (std))
 
 def norm_demo():
-    img = T.Compose([
-        T.ToTensor(),
-        T.Normalize(mean=[140.10686],
-                    std=[80.187306])
-    ])(Image.open("/home/yons/yangwenbo/pytorchStudy/data/train/POS-ZH0507073303655.bmp"))
-    print(img)
+    img = T.ToTensor()(Image.open("/home/yons/yangwenbo/pytorchStudy/data/train/POS-76279622-a478-11ea-be50-b42e99672a565.bmp"))
+    print((img > 1).nonzero())
+
+    # img = T.Normalize(mean=[0.5],
+    #                 std=[0.5])(img)
+    # print(img)
 
 if __name__ == '__main__':
     import fire
