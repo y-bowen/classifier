@@ -230,6 +230,7 @@ def compute_mean_std():
         h, w = img.size
         pixels_num += h * w  # 统计单个通道的像素数量
         img = np.array(img)
+        print(img.shape)
         temp = img[:, :, 0]
         channel += np.sum(temp)
         channel_square += np.sum(np.power(temp, 2.0))
