@@ -36,8 +36,8 @@ class BatteryCap(data.Dataset):
 
         if transforms is None:
             # 数据转换操作，测试验证和训练的数据转换有所区别
-            normalize = T.Normalize(mean=140.10686,
-                                    std=80.187306)  # 怎么来的？？
+            normalize = T.Normalize(mean=[140.10686],
+                                    std=[80.187306])  # 怎么来的？？
 
             # 测试集和验证集不用数据增强
             if self.test or not train:
