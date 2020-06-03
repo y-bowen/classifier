@@ -14,8 +14,7 @@ efficientnet_b7 = EfficientNet.from_name("efficientnet-b7")
 class Efficientnet_b0(BasicModule):
     def __init__(self):
         super(Efficientnet_b0, self).__init__()
-        self.efficientnet_b0 = EfficientNet.from_name("efficientnet-b0", in_channels=1, image_size=1300)
-        self.efficientnet_b0._fc.out_features = 2
+        self.efficientnet_b0 = EfficientNet.from_name("efficientnet-b7", in_channels=1, num_classes=2)
 
     def forward(self, x):
         return self.efficientnet_b0(x)
