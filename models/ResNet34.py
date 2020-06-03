@@ -52,14 +52,7 @@ class ResNet34(BasicModule):
 
         # 分类用的全连接
         self.classifier = nn.Sequential(
-            # nn.Dropout(),
-            nn.Linear(12800, 6400),
-            # nn.Dropout(),
-            nn.Linear(6400, 3200),
-            nn.Linear(3200, 1024),
-            nn.Linear(1024, 512),
-            nn.Linear(512, 128),
-            nn.Linear(128, num_classes)
+            nn.Linear(512, num_classes)
         )
 
     def _make_layer(self, inchannel, outchannel, block_num, stride=1):

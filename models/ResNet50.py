@@ -63,10 +63,10 @@ class ResNet(BasicModule):
 
         self.conv1 = Conv1(in_planes=input_channel, places=64)
 
-        self.layer1 = self.make_layer(in_places=64, places=64, block=blocks[0], stride=1)
-        self.layer2 = self.make_layer(in_places=256, places=128, block=blocks[1], stride=2)
-        self.layer3 = self.make_layer(in_places=512, places=256, block=blocks[2], stride=2)
-        self.layer4 = self.make_layer(in_places=1024, places=512, block=blocks[3], stride=2)
+        self.layer1 = self.make_layer(input_channel=64, output_channel=64, block=blocks[0], stride=1)
+        self.layer2 = self.make_layer(input_channel=256, output_channel=128, block=blocks[1], stride=2)
+        self.layer3 = self.make_layer(input_channel=512, output_channel=256, block=blocks[2], stride=2)
+        self.layer4 = self.make_layer(input_channel=1024, output_channel=512, block=blocks[3], stride=2)
 
         self.avgpool = nn.AvgPool2d(10, stride=1)
         self.classifier = nn.Sequential(
@@ -86,11 +86,11 @@ class ResNet(BasicModule):
                 nn.init.constant_(m.weight, 1)
                 nn.init.constant_(m.bias, 0)
 
-    def make_layer(self, in_places, places, block, stride):
+    def make_layer(self, input_channel, output_channel, block, stride):
         layers = []
-        layers.append(Bottleneck(in_places, places, stride, downsampling=True))
+        layers.append(Bottleneck(input_channel, output_channel, stride, downsampling=True))
         for i in range(1, block):
-            layers.append(Bottleneck(places * self.expansion, places))
+            layers.append(Bottleneck(output_channel * self.expansion, output_channel))
 
         return nn.Sequential(*layers)
 
