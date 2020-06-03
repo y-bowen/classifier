@@ -21,7 +21,7 @@ class DefaultConfig(object):
     debug_file = '/tmp/debug'  # if os.path.exists(debug_file): enter ipdb
     result_file = 'result.csv'
 
-    max_epoch = 20  # default: 10  100
+    max_epoch = 30  # default: 10  100
     lr = 0.001  # initial learning rate
     lr_decay = 0.5  # when val_loss increase, lr = lr*lr_decay   default: 0.5
     weight_decay = 0e-5  # 损失函数  default: 0e-5    1e-5
