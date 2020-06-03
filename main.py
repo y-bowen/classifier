@@ -249,6 +249,14 @@ def compute_mean_std():
     print("mean is %f" % (mean))
     print("std is %f" % (std))
 
+def norm_demo():
+    img = T.Compose([
+        T.ToTensor(),
+        T.Normalize(mean=[140.10686],
+                    std=[80.187306])
+    ])(Image.open("/home/yons/yangwenbo/pytorchStudy/data/train/POS-ZH0507073303655.bmp"))
+    print(img)
+
 if __name__ == '__main__':
     import fire
 
