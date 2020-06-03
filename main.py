@@ -249,14 +249,6 @@ def compute_mean_std():
     print("mean is %f" % (mean))
     print("std is %f" % (std))
 
-def norm_demo():
-    img = T.ToTensor()(Image.open("/home/yons/yangwenbo/pytorchStudy/data/train/POS-76279622-a478-11ea-be50-b42e99672a565.bmp"))
-    print((img > 1).nonzero())
-
-    # img = T.Normalize(mean=[0.5],
-    #                 std=[0.5])(img)
-    # print(img)
-
 if __name__ == '__main__':
     import fire
 
