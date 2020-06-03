@@ -36,25 +36,25 @@ class BatteryCap(data.Dataset):
 
         if transforms is None:
             # 数据转换操作，测试验证和训练的数据转换有所区别
-            normalize = T.Normalize(mean=[0.485, 0.456, 0.406],
-                                    std=[0.229, 0.224, 0.225])  # 怎么来的？？
+            normalize = T.Normalize(mean=140.10686,
+                                    std=80.187306)  # 怎么来的？？
 
             # 测试集和验证集不用数据增强
             if self.test or not train:
                 self.transforms = T.Compose([
-                    T.Resize(600),
+                    # T.Resize(1300),
                     # T.CenterCrop(224),
                     T.ToTensor(),
-                    # normalize
+                    normalize
                 ])
             # 训练集需要数据增强
             else:
                 self.transforms = T.Compose([
-                    T.Resize(600),
+                    # T.Resize(1300),
                     # T.RandomResizedCrop(224),  # 有改动 RandomReSizedCrop -> RandomResizedCrop
                     # T.RandomHorizontalFlip(),
                     T.ToTensor(),
-                    # normalize
+                    normalize
                 ])
 
     def __getitem__(self, index):
