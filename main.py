@@ -83,7 +83,7 @@ def train(**kwargs):
                 if os.path.exists(opt.debug_file):
                     import ipdb;
                     ipdb.set_trace()
-        model.save(opt.model)
+        model.save()
 
         # validate and visualize  计算验证集上的指标及可视化
         val_cm, val_accuracy = val(model, val_dataloader)
@@ -248,6 +248,62 @@ def compute_mean_std():
 
     print("mean is %f" % (mean))
     print("std is %f" % (std))
+
+def flask():
+    from flask import Flask
+    from flask import request, Response, render_template
+    from gevent import pywsgi
+    import io
+    import base64
+    from flask import jsonify, json
+
+    app = Flask(__name__)
+
+    @app.route('/')
+    def hello_world():
+        # 获取图片文件 name = upload
+        return render_template('index.html', name="demo")
+
+    @app.route('/upload/', methods=['POST'])
+    def upload():
+        # 获取图片文件 name = upload
+        img = request.files['file']
+        score_thr = 0.9
+        data = Image.open(img)
+        data = T.ToTensor()(data)
+        img = t.Tensor(1, 1, 1300, 1300)
+        img[0] = data
+        model = t.load(opt.load_model_path)
+        model.to(opt.device)
+        model.eval()
+
+        score = model(img)
+
+        print(score.size())
+
+        # result = inference_detector(model, img)
+        # a = np.zeros(shape=(0, 5))
+        # result = [result[i] if i == 14 else a for i in range(len(result))]
+        # scores = result[14][:, -1]
+        # inds = scores > score_thr
+        # result[14] = result[14][inds, :]
+        # img = show_result(img, result, model.CLASSES, score_thr=score_thr, wait_time=1, show=False)
+        # img = Image.fromarray(numpy.uint8(img))
+        # imgByteArr = io.BytesIO()
+        # img.save(imgByteArr, format='JPEG')
+        # imgByteArr = imgByteArr.getvalue()
+        # # 返回图片
+        # # m = Model(base64.b64encode(imgByteArr),len(result[14]))
+        # # resp = Response(base64.b64encode(imgByteArr), mimetype="application/text")
+        # # return jsonify(
+        # #     img=base64.b64encode(imgByteArr),
+        # #     num=len(result[14]))
+        # print(type(base64.b64encode(imgByteArr)))
+        # return json.dumps({'img': str(base64.b64encode(imgByteArr), encoding="utf-8"), 'num': len(result[14])}), 200, {
+        #     'ContentType': 'application/json'}
+    app.debug = True
+    server = pywsgi.WSGIServer(('0.0.0.0', 5000), app)
+    server.serve_forever()
 
 if __name__ == '__main__':
     import fire

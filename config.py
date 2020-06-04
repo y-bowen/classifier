@@ -11,7 +11,7 @@ class DefaultConfig(object):
     inputchannel = 1  # 输入图片通道
     train_data_root = './data/train/'  # 训练集存放路径   default: './data/train/'
     test_data_root = './data/test1'  # 测试集存放路径     default: './data/test1'
-    load_model_path = None  # 加载预训练的模型的路径，为None代表不加载  default: None
+    load_model_path = "./SEResNet50"  # 加载预训练的模型的路径，为None代表不加载  default: None
 
     batch_size = 8  # batch size   default: 32  4
     use_gpu = True  # user GPU or not
@@ -22,7 +22,7 @@ class DefaultConfig(object):
     result_file = 'result.csv'
 
     max_epoch = 30  # default: 10  100
-    lr = 0.001  # initial learning rate
+    lr = 0.0001  # initial learning rate
     lr_decay = 0.5  # when val_loss increase, lr = lr*lr_decay   default: 0.5
     weight_decay = 0e-5  # 损失函数  default: 0e-5    1e-5
 
