@@ -66,13 +66,13 @@
             contentType: false, //必须
             success: function (result) {
 
-                $('#testimg').attr('src', 'data:image/jpeg;base64,' + result.img);
-                $('#num').html("该产品：" + result.num)
+                // $('#testimg').attr('src', 'data:image/jpeg;base64,' + result.img);
+                $('#num').html("该产品：" + result.type)
             },
             error: function (result) {
                 console.log(result)
-                $('#testimg').attr('src', 'data:image/jpeg;base64,' + result.img);
-                $('#num').html(result.num)
+                // $('#testimg').attr('src', 'data:image/jpeg;base64,' + result.img);
+                $('#num').html(result.type)
             }
         })
     }

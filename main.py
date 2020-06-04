@@ -273,14 +273,13 @@ def flask():
         data = T.ToTensor()(data)
         img = t.Tensor(1, 1, 1300, 1300)
         img[0] = data
-        model = t.load(opt.load_model_path)
-        model.to(opt.device)
+        model = getattr(models, opt.model)()
+        model.load(opt.load_model_path)
+        device = t.device('cpu')
+        model.to(device)
         model.eval()
-
         score = model(img)
-
-        print(score.size())
-
+        probability = t.nn.functional.softmax(score, dim=1)[:, 1].detach().tolist()
         # result = inference_detector(model, img)
         # a = np.zeros(shape=(0, 5))
         # result = [result[i] if i == 14 else a for i in range(len(result))]
@@ -288,7 +287,7 @@ def flask():
         # inds = scores > score_thr
         # result[14] = result[14][inds, :]
         # img = show_result(img, result, model.CLASSES, score_thr=score_thr, wait_time=1, show=False)
-        # img = Image.fromarray(numpy.uint8(img))
+        # img = Image.fromarray(np.uint8(data))
         # imgByteArr = io.BytesIO()
         # img.save(imgByteArr, format='JPEG')
         # imgByteArr = imgByteArr.getvalue()
@@ -301,6 +300,8 @@ def flask():
         # print(type(base64.b64encode(imgByteArr)))
         # return json.dumps({'img': str(base64.b64encode(imgByteArr), encoding="utf-8"), 'num': len(result[14])}), 200, {
         #     'ContentType': 'application/json'}
+        return json.dumps({'type': "合格" if probability[0] >= score_thr else "不合格"}), 200, {
+            'ContentType': 'application/json'}
     app.debug = True
     server = pywsgi.WSGIServer(('0.0.0.0', 5000), app)
     server.serve_forever()
