@@ -310,3 +310,10 @@ if __name__ == '__main__':
     import fire
 
     fire.Fire()
+    # data = t.randn(1, 12, 3, 3)
+    # data = t.nn.AvgPool2d(3)(data)
+    # print(data.size())
+
+
+    # data = t.nn.Conv2d(in_channels=4, out_channels=5, kernel_size=1, stride=1, padding=0, bias=False)
+    # print(list(data.parameters())[0].data.numpy().shape)
