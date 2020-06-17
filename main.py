@@ -15,6 +15,7 @@ from torchnet import meter
 import models
 import numpy as np
 
+
 def train(**kwargs):
     """
     训练
@@ -65,6 +66,12 @@ def train(**kwargs):
 
             optimizer.zero_grad()  # 梯度清零
             score = model(input_batch)
+            print("网络输出的：", score)
+            print("-------------------------------")
+            print("label", label)
+            print("-------------------------------")
+            print("softmax后：", t.nn.functional.softmax(score.detach(), dim=1).detach().tolist())
+            print("-------------------------------")
             loss = criterion(score, label_batch)
             loss.backward()  # 反向传播
             optimizer.step()  # 优化
@@ -147,7 +154,7 @@ def test(**kwargs):
     opt._parse(kwargs)
 
     # configure model  模型
-    model = getattr("models", opt.model)().eval()
+    model = getattr(models, opt.model)().eval()
     if opt.load_model_path:
         model.load(opt.load_model_path)
     model.to(opt.device)
@@ -163,12 +170,14 @@ def test(**kwargs):
     for ii, (data, path) in tqdm(enumerate(test_dataloader)):
         test_input = data.to(opt.device)
         test_score = model(test_input)
-        probability = t.nn.functional.softmax(test_score, dim=1)[:, 1].detach().tolist()  # 这里改过，github代码有误
-        # label = score.max(dim = 1)[1].detach().tolist()
-
-        batch_results = [(path_.item(), probability_) for path_, probability_ in zip(path, probability)]
+        # print(test_score)
+        # print(t.nn.functional.softmax(test_score, dim=1))
+        probability = t.nn.functional.softmax(test_score, dim=1).detach()  # 这里改过，github代码有误
+        # print("probability:", probability)
+        label = probability.max(dim=1)
+        batch_results = [(path_, similarity.item(), "不合格" if category.item() == 0 else "合格") for
+                         path_, similarity, category in zip(path, label[0], label[1])]
         results += batch_results
-
     write_csv(results, opt.result_file)
 
     return results
@@ -218,6 +227,7 @@ def transforms():
         data = T.RandomRotation(270)(img)
         data.save(os.path.join("./data/train", p))
 
+
 def compute_mean_std():
     channel = 0
     std = 0
@@ -231,7 +241,6 @@ def compute_mean_std():
         channel += img.mean()
         std += img.std()
         # channel_square += np.sum(np.power(img, 2.0))
-
 
     mean = channel / len(filename)
 
@@ -248,6 +257,7 @@ def compute_mean_std():
 
     print("mean is %f" % (mean))
     print("std is %f" % (std))
+
 
 def flask():
     from flask import Flask
@@ -302,9 +312,11 @@ def flask():
         #     'ContentType': 'application/json'}
         return json.dumps({'type': "合格" if probability[0] >= score_thr else "不合格"}), 200, {
             'ContentType': 'application/json'}
+
     app.debug = True
     server = pywsgi.WSGIServer(('0.0.0.0', 5000), app)
     server.serve_forever()
+
 
 if __name__ == '__main__':
     import fire
@@ -313,7 +325,6 @@ if __name__ == '__main__':
     # data = t.randn(1, 12, 3, 3)
     # data = t.nn.AvgPool2d(3)(data)
     # print(data.size())
-
 
     # data = t.nn.Conv2d(in_channels=4, out_channels=5, kernel_size=1, stride=1, padding=0, bias=False)
     # print(list(data.parameters())[0].data.numpy().shape)
