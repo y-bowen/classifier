@@ -1,1 +1,1 @@
-# pytorchStudy
+# pytorch based classifier
